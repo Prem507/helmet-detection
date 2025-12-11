@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>AI Helmet Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+    <div class="glow-container"></div> 
+    
+    <main class="app-container">
+        <header class="app-header">
+            <h1><span class="accent-text">AI</span> Detector</h1>
+            <p class="tagline">YOLOv8 Helmet and Safety Gear Analysis.</p>
+        </header>
+
+        <section class="interface-grid">
+            <div class="card upload-card">
+                <div class="drop-zone" id="dropzone">
+                    <input id="fileInput" type="file" accept="image/*,video/*" />
+                    <div class="dz-content">
+                        <p class="dz-icon">✨</p>
+                        <strong>Drag & Drop Media</strong>
+                        <button id="chooseBtn" class="link-btn">or Select File</button>
+                        <p class="muted-text">Images recommended for quick processing.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card preview-control-card">
+                <div class="preview-area">
+                    <h3 class="card-title">File Preview</h3>
+                    <div class="media-frame preview-frame">
+                        <img id="previewImage" alt="Preview" class="preview-media hidden" />
+                        <video id="previewVideo" class="preview-media hidden" controls></video>
+                        <video id="webcamFeed" class="preview-media hidden" autoplay playsinline muted></video>
+                        <p id="noPreview" class="muted-text">No file selected...</p>
+                    </div>
+                </div>
+
+                <div class="control-area">
+                    <div class="controls-row">
+                        <button id="detectBtn" class="btn primary-btn" disabled>
+                            <span class="btn-icon">🧠</span> Run Detection
+                        </button>
+                        <button id="resetBtn" class="btn secondary-btn" disabled>
+                            <span class="btn-icon">🗑️</span> Reset
+                        </button>
+                    </div>
+
+                    <div class="camera-controls">
+                        <button id="startCamBtn" class="btn secondary-btn">
+                            🎥 Start Webcam
+                        </button>
+                        <button id="stopCamBtn" class="btn secondary-btn" disabled>
+                            ✖ Stop Webcam
+                        </button>
+                    </div>
+
+                    <div class="status-bar" id="status">Ready</div>
+                </div>
+            </div>
+            
+            <div class="card result-card">
+                <h3 class="card-title">Detection Result</h3>
+                <div class="result-frame">
+                    <img id="resultImage" class="result-media hidden" alt="Detection result" />
+                    <p id="resultText" class="muted-text">Output will appear here.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="app-footer">
+            <small>Aesthetic Demo • Powered by Flask & YOLO</small>
+        </footer>
+    </main>
+
+    <!-- Alert popup -->
+    <div id="alertBox" class="alert-box hidden" role="alert" aria-live="assertive"></div>
+
+    <!-- optional alert sound -->
+    <audio id="alertSound" src="{{ url_for('static', filename='sounds/alert.mp3') }}" preload="auto"></audio>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
